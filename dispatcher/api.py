@@ -75,7 +75,11 @@ def state(clock: str | None = None) -> dict:
     base = s.baseline()
     out = _scenario_payload(scn, _clock(clock))
     out["baseline_kpis"] = base["plan"]["kpis"] if base else None
+    out["day_plan_kpis"] = s.day_plan()["plan"]["kpis"]
+    out["has_changes"] = scn.get("parent_id") is not None
     out["llm"] = llm.llm_available()
+    out["llm_provider"] = llm.provider()
+    out["llm_model"] = llm.model_name()
     out["pending"] = len(s.proposals("PENDING"))
     return out
 
@@ -97,7 +101,7 @@ class Command(BaseModel):
 def command(cmd: Command, x_user: str = Header(default="dispecer")) -> dict:
     s = store()
     res = handle_command(s, cmd.text, _clock(cmd.clock), x_user)
-    return {"answer": res.answer, "intent": res.intent, "proposal_ids": res.proposal_ids, "source": res.source,
+    return {"answer": res.answer, "model": llm.model_name() if res.source == "llm" else None, "intent": res.intent, "proposal_ids": res.proposal_ids, "source": res.source,
             "tool_calls": res.tool_calls, "cost_usd": round(res.cost_usd, 4), "latency_ms": res.latency_ms}
 
 
@@ -157,7 +161,7 @@ def audit() -> dict:
 def roi_view(working_days: int = 300, dispatcher_rsd_per_hour: float = 1200, disruptions_per_day: float = 1.5,
              manual_plan_min: float = 90, manual_replan_min: float = 35) -> dict:
     s = store()
-    base, scn = s.baseline(), s.active()
+    base, scn = s.baseline(), s.day_plan()  # same orders, no disruptions: a like-for-like comparison
     return roi.business_case(base["plan"]["kpis"], scn["plan"]["kpis"], working_days, dispatcher_rsd_per_hour,
                              disruptions_per_day, manual_plan_min, manual_replan_min)
 

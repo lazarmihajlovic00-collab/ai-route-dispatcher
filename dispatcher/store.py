@@ -85,6 +85,12 @@ class Store:
         row = self.conn.execute("SELECT * FROM scenario WHERE status='baseline' ORDER BY id DESC LIMIT 1").fetchone()
         return self._scn(row)
 
+    def day_plan(self) -> dict | None:
+        """The day's original optimized plan (before any disruption was applied)."""
+        row = self.conn.execute("SELECT * FROM scenario WHERE parent_id IS NULL AND status IN ('active','superseded') "
+                                "ORDER BY id LIMIT 1").fetchone()
+        return self._scn(row)
+
     def set_status(self, sid: int, status: str) -> None:
         with self._lock:
             self.conn.execute("UPDATE scenario SET status=? WHERE id=?", (status, sid))

@@ -1,4 +1,8 @@
-"""Thin wrapper around the Anthropic SDK: availability, model choice, pricing."""
+"""LLM providers for the dispatcher: Anthropic Claude (SDK) or Google Gemini (REST, free tier works).
+
+LLM_PROVIDER=anthropic|gemini picks one explicitly. Without it, the provider follows whichever key is set:
+ANTHROPIC_API_KEY first, then GEMINI_API_KEY. With no key, the rule parser is used.
+"""
 
 from __future__ import annotations
 
@@ -15,11 +19,43 @@ PRICING = {
     "claude-haiku-5-5": (0.10, 0.50, 0.01),
 }
 
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_URL = os.environ.get("GEMINI_URL", "https://generativelanguage.googleapis.com/v1beta")
+
 _client = None
+_gemini_http = None
+
+
+def provider() -> str | None:
+    if os.environ.get("LLM_DISABLED") == "1":
+        return None
+    explicit = os.environ.get("LLM_PROVIDER", "").strip().lower()
+    if explicit in ("anthropic", "claude"):
+        return "anthropic" if os.environ.get("ANTHROPIC_API_KEY") else None
+    if explicit in ("gemini", "google"):
+        return "gemini" if os.environ.get("GEMINI_API_KEY") else None
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        return "anthropic"
+    if os.environ.get("GEMINI_API_KEY"):
+        return "gemini"
+    return None
 
 
 def llm_available() -> bool:
-    return bool(os.environ.get("ANTHROPIC_API_KEY")) and os.environ.get("LLM_DISABLED") != "1"
+    return provider() is not None
+
+
+def model_name() -> str | None:
+    return {"anthropic": DISPATCH_MODEL, "gemini": GEMINI_MODEL}.get(provider() or "")
+
+
+def gemini_http():
+    global _gemini_http
+    if _gemini_http is None:
+        import httpx
+
+        _gemini_http = httpx.Client(timeout=120)
+    return _gemini_http
 
 
 def client():
@@ -32,5 +68,7 @@ def client():
 
 
 def cost_usd(model: str, input_tokens: int, output_tokens: int, cache_read: int = 0) -> float:
+    if model.startswith("gemini"):
+        return 0.0  # free tier; set your own price here if you use a paid Gemini plan
     pin, pout, pcache = PRICING.get(model, PRICING["claude-opus-5-5"])
     return (input_tokens * pin + output_tokens * pout + cache_read * pcache) / 1_000_000

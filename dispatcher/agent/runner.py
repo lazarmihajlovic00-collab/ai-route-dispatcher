@@ -1,6 +1,7 @@
 """AI dispatcher: understands requests in Serbian, calls the planning tools, explains the result.
 
-Manual tool-use loop on the Messages API. The model never computes routes or numbers itself: routes come
+Manual tool-use loop, on the Anthropic Messages API or on Gemini function calling (same tools, same
+system prompt, same approval rules). The model never computes routes or numbers itself: routes come
 from OR-Tools, numbers from the simulator, and every change is a proposal that waits for a person.
 """
 
@@ -134,7 +135,23 @@ def _execute(store: Store, name: str, args: dict, clock: int, user: str, result:
         return {"error": str(e)}
 
 
-def run(store: Store, command: str, clock: int, user: str = "dispecer", history: list | None = None) -> DispatchResult:
+def run(store: Store, command: str, clock: int, user: str = "dispecer") -> DispatchResult:
+    if llm.provider() == "gemini":
+        result = _run_gemini(store, command, clock, user)
+    else:
+        result = _run_anthropic(store, command, clock, user)
+    if result.intent is None:
+        names = [c["name"] for c in result.tool_calls]
+        if "ruta_vozila" in names:
+            result.intent = {"intent": "route", "vehicle": result.tool_calls[names.index("ruta_vozila")]["input"].get("vozilo")}
+        elif "pregled_plana" in names:
+            result.intent = {"intent": "overview"}
+        else:
+            result.intent = {"intent": "unknown"}
+    return result
+
+
+def _run_anthropic(store: Store, command: str, clock: int, user: str, history: list | None = None) -> DispatchResult:
     model = llm.DISPATCH_MODEL
     scn, problem, _ = service.current(store)
     messages = list(history or []) + [{"role": "user", "content": f"(clock: {hhmm(clock)}, dan: {problem.day})\n{command}"}]
@@ -177,8 +194,90 @@ def run(store: Store, command: str, clock: int, user: str = "dispecer", history:
     else:
         result.answer = "Nisam završio u dozvoljenom broju koraka."
     result.latency_ms = int((time.perf_counter() - t0) * 1000)
-    if result.intent is None:
-        result.intent = {"intent": "overview"} if any(c["name"] == "pregled_plana" for c in result.tool_calls) else \
-            ({"intent": "route", "vehicle": result.tool_calls[-1]["input"].get("vozilo")}
-             if any(c["name"] == "ruta_vozila" for c in result.tool_calls) else {"intent": "unknown"})
+    return result
+
+
+# ------------------------------------------------------------------------------------------------ gemini
+def _gemini_schema(schema: dict) -> dict:
+    """JSON Schema (strict tools) -> Gemini's OpenAPI subset: nullable instead of type lists, no
+    additionalProperties."""
+    out: dict = {}
+    t = schema.get("type")
+    if isinstance(t, list):
+        non_null = [x for x in t if x != "null"]
+        out["type"] = non_null[0].upper()
+        if "null" in t:
+            out["nullable"] = True
+    elif t:
+        out["type"] = t.upper()
+    if "description" in schema:
+        out["description"] = schema["description"]
+    if "properties" in schema:
+        out["properties"] = {k: _gemini_schema(v) for k, v in schema["properties"].items()}
+        if schema.get("required"):
+            out["required"] = list(schema["required"])
+    return out
+
+
+def gemini_tools() -> list[dict]:
+    decls = []
+    for t in TOOLS:
+        d = {"name": t["name"], "description": t["description"]}
+        if t["input_schema"].get("properties"):
+            d["parameters"] = _gemini_schema(t["input_schema"])
+        decls.append(d)
+    return [{"functionDeclarations": decls}]
+
+
+def _run_gemini(store: Store, command: str, clock: int, user: str) -> DispatchResult:
+    import os
+
+    model = llm.GEMINI_MODEL
+    _, problem, _ = service.current(store)
+    contents = [{"role": "user", "parts": [{"text": f"(clock: {hhmm(clock)}, dan: {problem.day})\n{command}"}]}]
+    result = DispatchResult(answer="")
+    t0 = time.perf_counter()
+    url = f"{llm.GEMINI_URL}/models/{model}:generateContent"
+    for _ in range(MAX_TURNS):
+        t_call = time.perf_counter()
+        resp = llm.gemini_http().post(url, headers={"x-goog-api-key": os.environ.get("GEMINI_API_KEY", "")}, json={
+            "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+            "contents": contents, "tools": gemini_tools(),
+            "toolConfig": {"functionCallingConfig": {"mode": "AUTO"}},
+        })
+        if resp.status_code >= 400:
+            result.answer = f"Gemini greška {resp.status_code}: {resp.text[:300]}"
+            break
+        body = resp.json()
+        usage = body.get("usageMetadata", {})
+        store.log_llm(model, usage.get("promptTokenCount", 0), usage.get("candidatesTokenCount", 0),
+                      usage.get("cachedContentTokenCount", 0), 0.0, int((time.perf_counter() - t_call) * 1000))
+        cands = body.get("candidates") or []
+        if not cands or "content" not in cands[0]:
+            reason = (cands[0].get("finishReason") if cands else None) or body.get("promptFeedback", {}).get("blockReason")
+            result.answer = f"Model nije dao odgovor ({reason})."
+            break
+        content = cands[0]["content"]
+        contents.append(content)  # keep parts as returned (thought signatures must go back unchanged)
+        calls = [p["functionCall"] for p in content.get("parts", []) if "functionCall" in p]
+        if not calls:
+            result.answer = "\n".join(p["text"] for p in content.get("parts", [])
+                                      if "text" in p and not p.get("thought")).strip()
+            break
+        responses = []
+        for call in calls:
+            args = call.get("args") or {}
+            for key in ("vozilo",):
+                if key in args and args[key] is not None:
+                    args[key] = int(args[key])
+            out = _execute(store, call["name"], args, clock, user, result)
+            result.tool_calls.append({"name": call["name"], "input": args})
+            fr = {"name": call["name"], "response": json.loads(json.dumps(out, ensure_ascii=False, default=str))}
+            if "id" in call:
+                fr["id"] = call["id"]
+            responses.append({"functionResponse": fr})
+        contents.append({"role": "user", "parts": responses})
+    else:
+        result.answer = "Nisam završio u dozvoljenom broju koraka."
+    result.latency_ms = int((time.perf_counter() - t0) * 1000)
     return result

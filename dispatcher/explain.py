@@ -65,6 +65,9 @@ def explain(problem: Problem, new_plan: Plan, diff: dict, change: dict) -> str:
     else:
         lines.append("Ništa još nije utovareno, pa je ceo dan ponovo optimizovan, uz što manje promena.")
 
+    if change["kind"] == "breakdown" and mode == "intraday" and not diff["moved"] and not diff["newly_unserved"]:
+        lines.append(f"Vozilo {change['vehicle_id']} je do tada već obavilo sve svoje isporuke, "
+                     "pa ništa ne treba preraspodeliti.")
     if diff["moved"]:
         by_to: dict[int, int] = {}
         for m in diff["moved"]:

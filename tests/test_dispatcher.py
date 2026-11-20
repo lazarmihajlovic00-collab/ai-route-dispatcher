@@ -122,3 +122,48 @@ def test_llm_tool_error_is_returned_not_raised(store, monkeypatch):
     r = handle_command(store, "otkazi xyz", 540, "lazar")
     assert r.proposal_ids == []
     assert fake.requests[1]["messages"][2]["content"][0].get("is_error") is True
+
+
+class FakeGemini:
+    def __init__(self, bodies):
+        self.bodies = list(bodies)
+        self.requests = []
+
+    def post(self, url, headers, json):
+        import copy
+
+        self.requests.append({"url": url, "headers": headers, "json": copy.deepcopy(json)})
+        return SimpleNamespace(status_code=200, json=lambda b=self.bodies.pop(0): b, text="")
+
+
+def test_gemini_provider_loop(store, monkeypatch):
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("LLM_DISABLED", raising=False)
+    monkeypatch.setenv("LLM_PROVIDER", "gemini")
+    fake = FakeGemini([
+        {"candidates": [{"content": {"role": "model", "parts": [
+            {"functionCall": {"name": "predlozi_kvar", "args": {"vozilo": 3.0, "vreme": None}},
+             "thoughtSignature": "sig-1"}]}}], "usageMetadata": {"promptTokenCount": 900, "candidatesTokenCount": 40}},
+        {"candidates": [{"content": {"role": "model", "parts": [{"text": "Predlog #1 čeka tvoje odobrenje."}]}}]},
+    ])
+    monkeypatch.setattr(llm, "_gemini_http", fake)
+    assert llm.provider() == "gemini"
+    r = handle_command(store, "trojka je u kvaru", 600, "lazar")
+    assert r.source == "llm" and r.intent["intent"] == "breakdown" and r.intent["vehicle"] == 3
+    assert store.proposal(r.proposal_ids[0])["status"] == "PENDING"
+    second = fake.requests[1]["json"]["contents"]
+    assert second[1]["parts"][0]["thoughtSignature"] == "sig-1"  # model turn sent back unchanged
+    assert second[2]["parts"][0]["functionResponse"]["name"] == "predlozi_kvar"
+    assert fake.requests[0]["headers"]["x-goog-api-key"] == "test-key"
+    assert r.answer.startswith("Predlog #1")
+
+
+def test_gemini_schema_conversion():
+    from dispatcher.agent.runner import gemini_tools
+
+    decls = {d["name"]: d for d in gemini_tools()[0]["functionDeclarations"]}
+    assert "parameters" not in decls["pregled_plana"]
+    p = decls["predlozi_hitnu_porudzbinu"]["parameters"]
+    assert p["properties"]["kg"] == {"type": "NUMBER", "nullable": True}
+    assert "additionalProperties" not in p

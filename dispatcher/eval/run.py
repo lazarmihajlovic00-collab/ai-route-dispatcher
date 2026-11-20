@@ -1,7 +1,7 @@
 """Evaluation: optimizer vs baseline, disruption recovery, and command understanding.
 
     dispatcher eval                       # all three parts, rules parser only
-    dispatcher eval --llm                 # also the LLM dispatcher (needs ANTHROPIC_API_KEY, costs money)
+    dispatcher eval --llm                 # also the LLM dispatcher (needs GEMINI_API_KEY or ANTHROPIC_API_KEY)
 """
 
 from __future__ import annotations
@@ -69,12 +69,9 @@ def disruption_benchmark(seeds: list[int], time_limit_s: float, per_seed: int = 
         p = make_problem(sd)
         plan = plan_day(p, time_limit_s)
         rng = random.Random(1000 + sd)
-        for _ in range(per_seed):
-            clock = rng.choice([480, 540, 600, 660])
-            busy = [r for r in plan.routes if any(s.depart > clock for t in r.trips for s in t.stops)]
-            if not busy:
-                continue
-            r = rng.choice(busy)
+        candidates = [(clock, r) for clock in (480, 540, 600, 660) for r in plan.routes
+                      if any(s.depart > clock for t in r.trips for s in t.stops)]
+        for clock, r in rng.sample(candidates, min(per_seed, len(candidates))):  # distinct (time, vehicle)
             stranded = sum(1 for t in r.trips for s in t.stops if s.depart > clock)
             t0 = time.perf_counter()
             res = replan(p, plan, Change("breakdown", vehicle_id=r.vehicle_id), clock, 5.0)
@@ -253,7 +250,7 @@ def to_markdown(rep: dict) -> str:
         lines += [f"| LLM dispatcher | **{s['llm_accuracy_pct']}%** |", "",
                   f"LLM cost: {s['llm_cost_usd_per_command']} USD per command, median latency {s['llm_latency_s_median']} s."]
     else:
-        lines += ["| LLM dispatcher | run `dispatcher eval --llm` with `ANTHROPIC_API_KEY` set |"]
+        lines += ["| LLM dispatcher | run `dispatcher eval --llm` with `GEMINI_API_KEY` or `ANTHROPIC_API_KEY` set |"]
     lines += ["", "Rule parser misses:", ""]
     for r in c["results"]["rules"]:
         if not r["ok"]:

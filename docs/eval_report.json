@@ -1,0 +1,1038 @@
+{
+ "optimizer": {
+  "instances": 8,
+  "time_limit_s": 10.0,
+  "rows": [
+   {
+    "seed": 1,
+    "orders": 95,
+    "baseline": {
+     "cost_rsd": 210503,
+     "km": 1110.8,
+     "vehicles_used": 8,
+     "late_stops": 15,
+     "late_minutes": 1013,
+     "unserved": 0,
+     "crew_hours": 48.5,
+     "co2_kg": 563.4
+    },
+    "optimized": {
+     "cost_rsd": 196563,
+     "km": 1068.2,
+     "vehicles_used": 9,
+     "late_stops": 0,
+     "late_minutes": 0,
+     "unserved": 0,
+     "crew_hours": 44.1,
+     "co2_kg": 509.3,
+     "trips": 9,
+     "solve_s": 10.01
+    },
+    "optimized_hard_violations": 0,
+    "baseline_hard_violations": 0
+   },
+   {
+    "seed": 2,
+    "orders": 95,
+    "baseline": {
+     "cost_rsd": 224295,
+     "km": 1234.7,
+     "vehicles_used": 9,
+     "late_stops": 24,
+     "late_minutes": 2428,
+     "unserved": 0,
+     "crew_hours": 53.3,
+     "co2_kg": 598.5
+    },
+    "optimized": {
+     "cost_rsd": 196173,
+     "km": 1111.5,
+     "vehicles_used": 9,
+     "late_stops": 0,
+     "late_minutes": 0,
+     "unserved": 0,
+     "crew_hours": 44.6,
+     "co2_kg": 496.6,
+     "trips": 9,
+     "solve_s": 10.0
+    },
+    "optimized_hard_violations": 0,
+    "baseline_hard_violations": 0
+   },
+   {
+    "seed": 3,
+    "orders": 95,
+    "baseline": {
+     "cost_rsd": 241969,
+     "km": 1467.0,
+     "vehicles_used": 9,
+     "late_stops": 23,
+     "late_minutes": 2484,
+     "unserved": 0,
+     "crew_hours": 58.9,
+     "co2_kg": 672.4
+    },
+    "optimized": {
+     "cost_rsd": 205505,
+     "km": 1279.4,
+     "vehicles_used": 9,
+     "late_stops": 0,
+     "late_minutes": 0,
+     "unserved": 0,
+     "crew_hours": 46.8,
+     "co2_kg": 566.4,
+     "trips": 9,
+     "solve_s": 10.0
+    },
+    "optimized_hard_violations": 0,
+    "baseline_hard_violations": 0
+   },
+   {
+    "seed": 4,
+    "orders": 95,
+    "baseline": {
+     "cost_rsd": 246677,
+     "km": 1541.1,
+     "vehicles_used": 9,
+     "late_stops": 30,
+     "late_minutes": 2884,
+     "unserved": 5,
+     "crew_hours": 59.5,
+     "co2_kg": 709.3
+    },
+    "optimized": {
+     "cost_rsd": 202960,
+     "km": 1154.7,
+     "vehicles_used": 9,
+     "late_stops": 0,
+     "late_minutes": 0,
+     "unserved": 1,
+     "crew_hours": 45.9,
+     "co2_kg": 535.2,
+     "trips": 9,
+     "solve_s": 10.01
+    },
+    "optimized_hard_violations": 0,
+    "baseline_hard_violations": 0
+   },
+   {
+    "seed": 5,
+    "orders": 95,
+    "baseline": {
+     "cost_rsd": 229814,
+     "km": 1255.5,
+     "vehicles_used": 9,
+     "late_stops": 28,
+     "late_minutes": 1911,
+     "unserved": 0,
+     "crew_hours": 55.2,
+     "co2_kg": 612.3
+    },
+    "optimized": {
+     "cost_rsd": 202898,
+     "km": 1148.2,
+     "vehicles_used": 9,
+     "late_stops": 0,
+     "late_minutes": 0,
+     "unserved": 0,
+     "crew_hours": 45.9,
+     "co2_kg": 530.7,
+     "trips": 9,
+     "solve_s": 10.0
+    },
+    "optimized_hard_violations": 0,
+    "baseline_hard_violations": 0
+   },
+   {
+    "seed": 6,
+    "orders": 95,
+    "baseline": {
+     "cost_rsd": 226471,
+     "km": 1221.8,
+     "vehicles_used": 9,
+     "late_stops": 22,
+     "late_minutes": 2104,
+     "unserved": 0,
+     "crew_hours": 52.6,
+     "co2_kg": 612.4
+    },
+    "optimized": {
+     "cost_rsd": 197603,
+     "km": 1155.3,
+     "vehicles_used": 9,
+     "late_stops": 0,
+     "late_minutes": 0,
+     "unserved": 0,
+     "crew_hours": 45.2,
+     "co2_kg": 509.4,
+     "trips": 9,
+     "solve_s": 10.0
+    },
+    "optimized_hard_violations": 0,
+    "baseline_hard_violations": 0
+   },
+   {
+    "seed": 7,
+    "orders": 95,
+    "baseline": {
+     "cost_rsd": 229581,
+     "km": 1267.0,
+     "vehicles_used": 9,
+     "late_stops": 22,
+     "late_minutes": 1868,
+     "unserved": 2,
+     "crew_hours": 53.1,
+     "co2_kg": 628.3
+    },
+    "optimized": {
+     "cost_rsd": 195083,
+     "km": 1081.0,
+     "vehicles_used": 9,
+     "late_stops": 0,
+     "late_minutes": 0,
+     "unserved": 0,
+     "crew_hours": 44.3,
+     "co2_kg": 487.4,
+     "trips": 9,
+     "solve_s": 10.0
+    },
+    "optimized_hard_violations": 0,
+    "baseline_hard_violations": 0
+   },
+   {
+    "seed": 8,
+    "orders": 95,
+    "baseline": {
+     "cost_rsd": 209788,
+     "km": 1098.8,
+     "vehicles_used": 9,
+     "late_stops": 20,
+     "late_minutes": 1553,
+     "unserved": 0,
+     "crew_hours": 48.9,
+     "co2_kg": 525.0
+    },
+    "optimized": {
+     "cost_rsd": 198322,
+     "km": 1129.7,
+     "vehicles_used": 9,
+     "late_stops": 0,
+     "late_minutes": 0,
+     "unserved": 0,
+     "crew_hours": 44.8,
+     "co2_kg": 514.0,
+     "trips": 9,
+     "solve_s": 10.01
+    },
+    "optimized_hard_violations": 0,
+    "baseline_hard_violations": 0
+   }
+  ],
+  "summary": {
+   "cost_saving_pct_mean": 12.1,
+   "cost_saving_pct_min": 5.5,
+   "cost_saving_pct_max": 17.7,
+   "cost_saving_rsd_per_day_mean": 27998.9,
+   "km_saving_mean": 133.6,
+   "crew_hours_saving_mean": 8.6,
+   "late_stops_baseline_mean": 23,
+   "late_stops_optimized_mean": 0,
+   "unserved_optimized_total": 1,
+   "plans_without_hard_violations_pct": 100.0
+  }
+ },
+ "disruptions": {
+  "scenarios": 32,
+  "rows": [
+   {
+    "seed": 1,
+    "kind": "breakdown",
+    "vehicle": 2,
+    "clock": "08:00",
+    "open_orders": 8,
+    "unserved_after": 1,
+    "late_after": 5,
+    "late_minutes": 290,
+    "cost_delta_rsd": 2741,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 1,
+    "kind": "breakdown",
+    "vehicle": 7,
+    "clock": "08:00",
+    "open_orders": 10,
+    "unserved_after": 0,
+    "late_after": 3,
+    "late_minutes": 107,
+    "cost_delta_rsd": -440,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 1,
+    "kind": "breakdown",
+    "vehicle": 3,
+    "clock": "08:00",
+    "open_orders": 7,
+    "unserved_after": 1,
+    "late_after": 5,
+    "late_minutes": 336,
+    "cost_delta_rsd": 13134,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 1,
+    "kind": "urgent_order",
+    "clock": "10:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 10093,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 2,
+    "kind": "breakdown",
+    "vehicle": 8,
+    "clock": "09:00",
+    "open_orders": 3,
+    "unserved_after": 0,
+    "late_after": 1,
+    "late_minutes": 115,
+    "cost_delta_rsd": 6955,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 2,
+    "kind": "breakdown",
+    "vehicle": 2,
+    "clock": "10:00",
+    "open_orders": 6,
+    "unserved_after": 0,
+    "late_after": 3,
+    "late_minutes": 196,
+    "cost_delta_rsd": 12312,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 2,
+    "kind": "breakdown",
+    "vehicle": 5,
+    "clock": "09:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 1,
+    "late_minutes": 78,
+    "cost_delta_rsd": 2254,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 2,
+    "kind": "urgent_order",
+    "clock": "09:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 5434,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 3,
+    "kind": "breakdown",
+    "vehicle": 7,
+    "clock": "09:00",
+    "open_orders": 3,
+    "unserved_after": 0,
+    "late_after": 2,
+    "late_minutes": 179,
+    "cost_delta_rsd": 10079,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 3,
+    "kind": "breakdown",
+    "vehicle": 9,
+    "clock": "09:00",
+    "open_orders": 3,
+    "unserved_after": 0,
+    "late_after": 2,
+    "late_minutes": 178,
+    "cost_delta_rsd": 13045,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 3,
+    "kind": "breakdown",
+    "vehicle": 3,
+    "clock": "09:00",
+    "open_orders": 3,
+    "unserved_after": 0,
+    "late_after": 2,
+    "late_minutes": 116,
+    "cost_delta_rsd": 3002,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 3,
+    "kind": "urgent_order",
+    "clock": "11:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 5232,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 4,
+    "kind": "breakdown",
+    "vehicle": 5,
+    "clock": "09:00",
+    "open_orders": 3,
+    "unserved_after": 0,
+    "late_after": 2,
+    "late_minutes": 85,
+    "cost_delta_rsd": 9353,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 4,
+    "kind": "breakdown",
+    "vehicle": 4,
+    "clock": "08:00",
+    "open_orders": 6,
+    "unserved_after": 1,
+    "late_after": 4,
+    "late_minutes": 195,
+    "cost_delta_rsd": 3829,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 4,
+    "kind": "breakdown",
+    "vehicle": 2,
+    "clock": "11:00",
+    "open_orders": 4,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 11637,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 4,
+    "kind": "urgent_order",
+    "clock": "11:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 3459,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 5,
+    "kind": "breakdown",
+    "vehicle": 7,
+    "clock": "09:00",
+    "open_orders": 2,
+    "unserved_after": 0,
+    "late_after": 1,
+    "late_minutes": 81,
+    "cost_delta_rsd": 4309,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 5,
+    "kind": "breakdown",
+    "vehicle": 6,
+    "clock": "11:00",
+    "open_orders": 3,
+    "unserved_after": 1,
+    "late_after": 2,
+    "late_minutes": 14,
+    "cost_delta_rsd": 3134,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 5,
+    "kind": "breakdown",
+    "vehicle": 4,
+    "clock": "09:00",
+    "open_orders": 2,
+    "unserved_after": 1,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 1764,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 5,
+    "kind": "urgent_order",
+    "clock": "10:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 3610,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 6,
+    "kind": "breakdown",
+    "vehicle": 3,
+    "clock": "09:00",
+    "open_orders": 2,
+    "unserved_after": 0,
+    "late_after": 1,
+    "late_minutes": 41,
+    "cost_delta_rsd": 2621,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 6,
+    "kind": "breakdown",
+    "vehicle": 2,
+    "clock": "08:00",
+    "open_orders": 7,
+    "unserved_after": 1,
+    "late_after": 3,
+    "late_minutes": 271,
+    "cost_delta_rsd": 8668,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 6,
+    "kind": "breakdown",
+    "vehicle": 8,
+    "clock": "08:00",
+    "open_orders": 10,
+    "unserved_after": 1,
+    "late_after": 5,
+    "late_minutes": 193,
+    "cost_delta_rsd": 4954,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 6,
+    "kind": "urgent_order",
+    "clock": "09:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 5127,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 7,
+    "kind": "breakdown",
+    "vehicle": 2,
+    "clock": "08:00",
+    "open_orders": 11,
+    "unserved_after": 0,
+    "late_after": 5,
+    "late_minutes": 272,
+    "cost_delta_rsd": 17612,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 7,
+    "kind": "breakdown",
+    "vehicle": 3,
+    "clock": "11:00",
+    "open_orders": 2,
+    "unserved_after": 0,
+    "late_after": 2,
+    "late_minutes": 147,
+    "cost_delta_rsd": 8005,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 7,
+    "kind": "breakdown",
+    "vehicle": 4,
+    "clock": "11:00",
+    "open_orders": 2,
+    "unserved_after": 0,
+    "late_after": 2,
+    "late_minutes": 118,
+    "cost_delta_rsd": 6371,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 7,
+    "kind": "urgent_order",
+    "clock": "09:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 5371,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 8,
+    "kind": "breakdown",
+    "vehicle": 9,
+    "clock": "09:00",
+    "open_orders": 6,
+    "unserved_after": 0,
+    "late_after": 4,
+    "late_minutes": 171,
+    "cost_delta_rsd": 5134,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 8,
+    "kind": "breakdown",
+    "vehicle": 6,
+    "clock": "09:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 1,
+    "late_minutes": 74,
+    "cost_delta_rsd": -2749,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   },
+   {
+    "seed": 8,
+    "kind": "breakdown",
+    "vehicle": 2,
+    "clock": "09:00",
+    "open_orders": 8,
+    "unserved_after": 0,
+    "late_after": 5,
+    "late_minutes": 165,
+    "cost_delta_rsd": 9905,
+    "replan_s": 5.0,
+    "hard_violations": 0
+   },
+   {
+    "seed": 8,
+    "kind": "urgent_order",
+    "clock": "11:00",
+    "open_orders": 1,
+    "unserved_after": 0,
+    "late_after": 0,
+    "late_minutes": 0,
+    "cost_delta_rsd": 7079,
+    "replan_s": 5.01,
+    "hard_violations": 0
+   }
+  ],
+  "summary": {
+   "breakdowns": 24,
+   "open_orders_total": 113,
+   "delivered_same_day_pct": 93.8,
+   "on_time_of_open_pct": 39.8,
+   "urgent_orders_served": 8,
+   "urgent_orders": 8,
+   "replan_s_median": 5.0,
+   "replan_s_max": 5.01,
+   "plans_without_hard_violations_pct": 100.0
+  }
+ },
+ "commands": {
+  "summary": {
+   "cases": 33,
+   "rules_accuracy_pct": 66.7
+  },
+  "results": {
+   "rules": [
+    {
+     "text": "Kamion 3 je u kvaru, preraspodeli",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "breakdown",
+      "vehicle": 3,
+      "time": null
+     }
+    },
+    {
+     "text": "Vozilo 5 se pokvarilo u 10:30",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "breakdown",
+      "vehicle": 5,
+      "time": 630
+     }
+    },
+    {
+     "text": "kombi 8 ne moze da krene",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "breakdown",
+      "vehicle": 8,
+      "time": null
+     }
+    },
+    {
+     "text": "Kamion 1 stao na autoputu kod Inđije od 9h",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "breakdown",
+      "vehicle": 1,
+      "time": 540
+     }
+    },
+    {
+     "text": "imamo udes, vozilo 6, preraspodeli njegove stanice",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "breakdown",
+      "vehicle": 6,
+      "time": null
+     }
+    },
+    {
+     "text": "Vozilu 2 je probušena guma, van funkcije je oko 11:15",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "breakdown",
+      "vehicle": 2,
+      "time": 675
+     }
+    },
+    {
+     "text": "Dvojka je u kvaru",
+     "ok": false,
+     "errors": [
+      "intent unknown != breakdown"
+     ],
+     "pred": {
+      "intent": "unknown"
+     }
+    },
+    {
+     "text": "Kombi broj 9 crkao",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "breakdown",
+      "vehicle": 9,
+      "time": null
+     }
+    },
+    {
+     "text": "Hitna porudžbina za Market Ribar, 1 paleta",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "add_order",
+      "customer": "C005",
+      "pallets": 1.0,
+      "kg": null,
+      "empties": null,
+      "tw_start": null,
+      "tw_end": null
+     }
+    },
+    {
+     "text": "Dodaj porudžbinu: Supermarket Avala Zemun 2 palete 1100 kg od 11 do 14",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "add_order",
+      "customer": "C137",
+      "pallets": 2.0,
+      "kg": 1100,
+      "empties": null,
+      "tw_start": 660,
+      "tw_end": 840
+     }
+    },
+    {
+     "text": "Hotel Zora iz Inđije traži još 0,5 paleta danas do 13h",
+     "ok": false,
+     "errors": [
+      "intent unknown != add_order"
+     ],
+     "pred": {
+      "intent": "unknown"
+     }
+    },
+    {
+     "text": "Ubaci hitnu isporuku Kafić Fruška Karaburma 0.3 palete",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "add_order",
+      "customer": "C037",
+      "pallets": 0.3,
+      "kg": null,
+      "empties": null,
+      "tw_start": null,
+      "tw_end": null
+     }
+    },
+    {
+     "text": "hitno: restoran kosmaj zvezdara, 4 gajbe i 1 bure",
+     "ok": false,
+     "errors": [
+      "intent unknown != add_order"
+     ],
+     "pred": {
+      "intent": "unknown"
+     }
+    },
+    {
+     "text": "Nova porudžbina za Supermarket Lastavica, 3 palete, 1600 kg, povratne ambalaže 1 paleta",
+     "ok": false,
+     "errors": [
+      "empties: None != 1.0"
+     ],
+     "pred": {
+      "intent": "add_order",
+      "customer": "C081",
+      "pallets": 3.0,
+      "kg": 1600,
+      "empties": null,
+      "tw_start": null,
+      "tw_end": null
+     }
+    },
+    {
+     "text": "Market Kej Batajnica hitno treba 0,8 paleta između 12 i 14",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "add_order",
+      "customer": "C201",
+      "pallets": 0.8,
+      "kg": null,
+      "empties": null,
+      "tw_start": 720,
+      "tw_end": 840
+     }
+    },
+    {
+     "text": "dodaj kafic jelena 0,4 palete",
+     "ok": false,
+     "errors": [
+      "intent add_order != clarify"
+     ],
+     "pred": {
+      "intent": "add_order",
+      "customer": "C029",
+      "pallets": 0.4,
+      "kg": null,
+      "empties": null,
+      "tw_start": null,
+      "tw_end": null
+     }
+    },
+    {
+     "text": "Restoran Zora je zatvoren danas",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "cancel",
+      "customer": "C017"
+     }
+    },
+    {
+     "text": "Kafić Toranj Novi Sad otkazao isporuku",
+     "ok": false,
+     "errors": [
+      "intent clarify != cancel"
+     ],
+     "pred": {
+      "intent": "clarify"
+     }
+    },
+    {
+     "text": "Market Terasa ne prima danas robu",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "cancel",
+      "customer": "C089"
+     }
+    },
+    {
+     "text": "Storniraj isporuku za Supermarket Salaš",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "cancel",
+      "customer": "C109"
+     }
+    },
+    {
+     "text": "Kafić Podrum odustao od porudžbine",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "cancel",
+      "customer": "C057"
+     }
+    },
+    {
+     "text": "Veleprodaja Breza Obrenovac je zatvorena zbog inventara",
+     "ok": false,
+     "errors": [
+      "customer: C061 != C025"
+     ],
+     "pred": {
+      "intent": "cancel",
+      "customer": "C061"
+     }
+    },
+    {
+     "text": "Restoran Bela lađa može tek od 13 do 15h",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "set_window",
+      "customer": "C129",
+      "tw_start": 780,
+      "tw_end": 900
+     }
+    },
+    {
+     "text": "Market Kod Mike Vračar prima robu samo posle 12",
+     "ok": false,
+     "errors": [
+      "intent clarify != set_window"
+     ],
+     "pred": {
+      "intent": "clarify"
+     }
+    },
+    {
+     "text": "Kafić Kod Steve Smederevo: pomeri isporuku na 11-13",
+     "ok": false,
+     "errors": [
+      "tw_start: None != 660",
+      "tw_end: None != 780"
+     ],
+     "pred": {
+      "intent": "set_window",
+      "customer": "C101",
+      "tw_start": null,
+      "tw_end": null
+     }
+    },
+    {
+     "text": "Market Pod lipom može od 10 do 12",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "set_window",
+      "customer": "C213",
+      "tw_start": 600,
+      "tw_end": 720
+     }
+    },
+    {
+     "text": "Supermarket Kod Lale treba da dobije robu između 9 i 11",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "set_window",
+      "customer": "C009",
+      "tw_start": 540,
+      "tw_end": 660
+     }
+    },
+    {
+     "text": "Trafika Breza Zemun, novi termin 14:00-15:00",
+     "ok": false,
+     "errors": [
+      "tw_start: None != 840",
+      "tw_end: None != 900"
+     ],
+     "pred": {
+      "intent": "set_window",
+      "customer": "C069",
+      "tw_start": null,
+      "tw_end": null
+     }
+    },
+    {
+     "text": "Kakav je pregled plana?",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "overview"
+     }
+    },
+    {
+     "text": "gde je kamion 2",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "route",
+      "vehicle": 2
+     }
+    },
+    {
+     "text": "koliko nas kosta danasnji plan",
+     "ok": false,
+     "errors": [
+      "intent unknown != overview"
+     ],
+     "pred": {
+      "intent": "unknown"
+     }
+    },
+    {
+     "text": "napiši mi pesmu o kamionima",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "unknown"
+     }
+    },
+    {
+     "text": "koliko je sati u Tokiju",
+     "ok": true,
+     "errors": [],
+     "pred": {
+      "intent": "unknown"
+     }
+    }
+   ],
+   "llm": []
+  }
+ }
+}
