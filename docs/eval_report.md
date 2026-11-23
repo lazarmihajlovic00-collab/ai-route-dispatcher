@@ -83,7 +83,7 @@ including hard ones: nicknames ("dvojka"), units in crates, ambiguous customer n
 | Method | Accuracy |
 |---|---|
 | Rule parser (no AI) | 66.7% |
-| LLM dispatcher | run `dispatcher eval --llm` with `GEMINI_API_KEY` or `ANTHROPIC_API_KEY` set |
+| LLM dispatcher (gemini-3.5-flash-lite, free tier) | **93.9%** (31 of 33), see [eval_commands.md](eval_commands.md) |
 
 Rule parser misses:
 

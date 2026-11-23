@@ -186,3 +186,12 @@ def test_gemini_retries_rate_limit(monkeypatch):
     monkeypatch.setattr(time, "sleep", slept.append)
     assert llm.gemini_post("u", {}).status_code == 200
     assert len(calls) == 2 and slept == [3]
+
+
+def test_tool_args_null_string_and_bad_values(store):
+    from dispatcher.agent.runner import DispatchResult, _execute, tool_to_intent
+
+    i = tool_to_intent("predlozi_hitnu_porudzbinu", {"kupac_id": "C001", "palete": 1, "prozor_od": "null"})
+    assert i["tw_start"] is None
+    out = _execute(store, "predlozi_promenu_prozora", {"kupac_id": "C001", "od": "abc"}, 600, "lazar", DispatchResult(answer=""))
+    assert "error" in out

@@ -19,7 +19,7 @@ PRICING = {
     "claude-haiku-5-5": (0.10, 0.50, 0.01),
 }
 
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")  # measured in docs/eval_commands.md; larger free quota
 GEMINI_URL = os.environ.get("GEMINI_URL", "https://generativelanguage.googleapis.com/v1beta")
 
 _client = None
@@ -54,7 +54,7 @@ def gemini_http():
     if _gemini_http is None:
         import httpx
 
-        _gemini_http = httpx.Client(timeout=120)
+        _gemini_http = httpx.Client(timeout=60)
     return _gemini_http
 
 
@@ -64,11 +64,19 @@ def gemini_post(url: str, payload: dict, retries: int = 6):
     import time
 
     for attempt in range(retries + 1):
-        resp = gemini_http().post(url, headers={"x-goog-api-key": os.environ.get("GEMINI_API_KEY", "")}, json=payload)
+        try:
+            resp = gemini_http().post(url, headers={"x-goog-api-key": os.environ.get("GEMINI_API_KEY", "")},
+                                      json=payload)
+        except Exception as e:  # network timeout or reset: wait and retry like a 503
+            if attempt == retries:
+                raise
+            print(f"[gemini] {type(e).__name__}, retrying", flush=True)
+            time.sleep(min(60, 5 * 2 ** attempt))
+            continue
         if resp.status_code not in (429, 500, 503) or attempt == retries:
             return resp
         hint = re.search(r'"retryDelay":\s*"(\d+)', resp.text)
-        wait = int(hint.group(1)) + 1 if hint else min(60, 5 * 2 ** attempt)
+        wait = min(90, int(hint.group(1)) + 1) if hint else min(60, 5 * 2 ** attempt)
         print(f"[gemini] {resp.status_code}, waiting {wait} s (attempt {attempt + 1}/{retries})", flush=True)
         time.sleep(wait)
     return resp

@@ -1,0 +1,824 @@
+{
+ "summary": {
+  "cases": 33,
+  "rules_accuracy_pct": 66.7,
+  "llm_accuracy_pct": 93.9,
+  "llm_cost_usd_total": 0.0,
+  "llm_cost_usd_per_command": 0.0,
+  "llm_model": "gemini-3.5-flash-lite",
+  "llm_errors": 0,
+  "llm_latency_s_median": 4.7
+ },
+ "results": {
+  "rules": [
+   {
+    "text": "Kamion 3 je u kvaru, preraspodeli",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 3,
+     "time": null
+    }
+   },
+   {
+    "text": "Vozilo 5 se pokvarilo u 10:30",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 5,
+     "time": 630
+    }
+   },
+   {
+    "text": "kombi 8 ne moze da krene",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 8,
+     "time": null
+    }
+   },
+   {
+    "text": "Kamion 1 stao na autoputu kod Inđije od 9h",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 1,
+     "time": 540
+    }
+   },
+   {
+    "text": "imamo udes, vozilo 6, preraspodeli njegove stanice",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 6,
+     "time": null
+    }
+   },
+   {
+    "text": "Vozilu 2 je probušena guma, van funkcije je oko 11:15",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 2,
+     "time": 675
+    }
+   },
+   {
+    "text": "Dvojka je u kvaru",
+    "ok": false,
+    "errors": [
+     "intent unknown != breakdown"
+    ],
+    "pred": {
+     "intent": "unknown"
+    }
+   },
+   {
+    "text": "Kombi broj 9 crkao",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 9,
+     "time": null
+    }
+   },
+   {
+    "text": "Hitna porudžbina za Market Ribar, 1 paleta",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C005",
+     "pallets": 1.0,
+     "kg": null,
+     "empties": null,
+     "tw_start": null,
+     "tw_end": null
+    }
+   },
+   {
+    "text": "Dodaj porudžbinu: Supermarket Avala Zemun 2 palete 1100 kg od 11 do 14",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C137",
+     "pallets": 2.0,
+     "kg": 1100,
+     "empties": null,
+     "tw_start": 660,
+     "tw_end": 840
+    }
+   },
+   {
+    "text": "Hotel Zora iz Inđije traži još 0,5 paleta danas do 13h",
+    "ok": false,
+    "errors": [
+     "intent unknown != add_order"
+    ],
+    "pred": {
+     "intent": "unknown"
+    }
+   },
+   {
+    "text": "Ubaci hitnu isporuku Kafić Fruška Karaburma 0.3 palete",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C037",
+     "pallets": 0.3,
+     "kg": null,
+     "empties": null,
+     "tw_start": null,
+     "tw_end": null
+    }
+   },
+   {
+    "text": "hitno: restoran kosmaj zvezdara, 4 gajbe i 1 bure",
+    "ok": false,
+    "errors": [
+     "intent unknown != add_order"
+    ],
+    "pred": {
+     "intent": "unknown"
+    }
+   },
+   {
+    "text": "Nova porudžbina za Supermarket Lastavica, 3 palete, 1600 kg, povratne ambalaže 1 paleta",
+    "ok": false,
+    "errors": [
+     "empties: None != 1.0"
+    ],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C081",
+     "pallets": 3.0,
+     "kg": 1600,
+     "empties": null,
+     "tw_start": null,
+     "tw_end": null
+    }
+   },
+   {
+    "text": "Market Kej Batajnica hitno treba 0,8 paleta između 12 i 14",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C201",
+     "pallets": 0.8,
+     "kg": null,
+     "empties": null,
+     "tw_start": 720,
+     "tw_end": 840
+    }
+   },
+   {
+    "text": "dodaj kafic jelena 0,4 palete",
+    "ok": false,
+    "errors": [
+     "intent add_order != clarify"
+    ],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C029",
+     "pallets": 0.4,
+     "kg": null,
+     "empties": null,
+     "tw_start": null,
+     "tw_end": null
+    }
+   },
+   {
+    "text": "Restoran Zora je zatvoren danas",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C017"
+    }
+   },
+   {
+    "text": "Kafić Toranj Novi Sad otkazao isporuku",
+    "ok": false,
+    "errors": [
+     "intent clarify != cancel"
+    ],
+    "pred": {
+     "intent": "clarify"
+    }
+   },
+   {
+    "text": "Market Terasa ne prima danas robu",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C089"
+    }
+   },
+   {
+    "text": "Storniraj isporuku za Supermarket Salaš",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C109"
+    }
+   },
+   {
+    "text": "Kafić Podrum odustao od porudžbine",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C057"
+    }
+   },
+   {
+    "text": "Veleprodaja Breza Obrenovac je zatvorena zbog inventara",
+    "ok": false,
+    "errors": [
+     "customer: C061 != C025"
+    ],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C061"
+    }
+   },
+   {
+    "text": "Restoran Bela lađa može tek od 13 do 15h",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C129",
+     "tw_start": 780,
+     "tw_end": 900
+    }
+   },
+   {
+    "text": "Market Kod Mike Vračar prima robu samo posle 12",
+    "ok": false,
+    "errors": [
+     "intent clarify != set_window"
+    ],
+    "pred": {
+     "intent": "clarify"
+    }
+   },
+   {
+    "text": "Kafić Kod Steve Smederevo: pomeri isporuku na 11-13",
+    "ok": false,
+    "errors": [
+     "tw_start: None != 660",
+     "tw_end: None != 780"
+    ],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C101",
+     "tw_start": null,
+     "tw_end": null
+    }
+   },
+   {
+    "text": "Market Pod lipom može od 10 do 12",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C213",
+     "tw_start": 600,
+     "tw_end": 720
+    }
+   },
+   {
+    "text": "Supermarket Kod Lale treba da dobije robu između 9 i 11",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C009",
+     "tw_start": 540,
+     "tw_end": 660
+    }
+   },
+   {
+    "text": "Trafika Breza Zemun, novi termin 14:00-15:00",
+    "ok": false,
+    "errors": [
+     "tw_start: None != 840",
+     "tw_end: None != 900"
+    ],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C069",
+     "tw_start": null,
+     "tw_end": null
+    }
+   },
+   {
+    "text": "Kakav je pregled plana?",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "overview"
+    }
+   },
+   {
+    "text": "gde je kamion 2",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "route",
+     "vehicle": 2
+    }
+   },
+   {
+    "text": "koliko nas kosta danasnji plan",
+    "ok": false,
+    "errors": [
+     "intent unknown != overview"
+    ],
+    "pred": {
+     "intent": "unknown"
+    }
+   },
+   {
+    "text": "napiši mi pesmu o kamionima",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "unknown"
+    }
+   },
+   {
+    "text": "koliko je sati u Tokiju",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "unknown"
+    }
+   }
+  ],
+  "llm": [
+   {
+    "text": "Kamion 3 je u kvaru, preraspodeli",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 3,
+     "time": 600
+    },
+    "answer": "Vozilo 3 je prijavilo kvar u 10:00, ali pošto je do tada već obavilo sve svoje isporuke, nikakva preraspodela nije potrebna.\nNijedno vozilo ne preuzima dodatne isporuke.\nNiko ne kasni i sve je već uspešno isporučeno.\nPromena troška dana je 0 RSD, a kilometraža se ne menja (+0 km).\n\nPredlog #1 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 4669
+   },
+   {
+    "text": "Vozilo 5 se pokvarilo u 10:30",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 5,
+     "time": 630
+    },
+    "answer": "Vozilo 5 se pokvarilo u 10:30, a pošto je do tada već obavilo sve svoje isporuke, plan ostaje nepromenjen.\nNema potrebe za preuzimanjem isporuka jer vozilo nema preostalih stanica.\nNiko ne kasni i sve isporuke će biti izvršene.\nPromena troška dana je +\n0 RSD, a kilometraža se ne menja (+0 km).\nPredlog #2 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 1758
+   },
+   {
+    "text": "kombi 8 ne moze da krene",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 8,
+     "time": 600
+    },
+    "answer": "Vozilo 8 je u kvaru od 10:00, a pošto je već obavilo sve svoje današnje isporuke, predlog ne zahteva preraspodelu.\nNema potrebe za preuzimanjem isporuka sa ovog vozila jer su sve već uspešno realizovane.\nNiko ne kasni i sve porudžbine su isporučene.\nPromena troška: 0 RSD, kilometraža +0 km.\nPredlog #3 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 7974
+   },
+   {
+    "text": "Kamion 1 stao na autoputu kod Inđije od 9h",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 1,
+     "time": 540
+    },
+    "answer": "Kamion 1 je u kvaru od 9h, pa predlog preraspodeljuje njegove preostale isporuke na preostala vozila.\nIsporuke preuzimaju: Vozilo 5 (4 stanice, dodatna tura u 10:20), Vozilo 8 (2 stanice, dodatna tura u 09:51) i Vozilo 9 (3 stanice, dodatna tura u 10:28); sve isporuke mogu biti obavljene.\nKasne Restoran Tri šešira (76 min) i Supermarket Galerija Pančevo (9 min) - preporučuje se poziv kupcima unapred.\nTrošak dana raste za 14.906 RSD (ukupno 211.478 RSD), a kilometraža za 270,8 km.\n\nPredlog #4 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 77084
+   },
+   {
+    "text": "imamo udes, vozilo 6, preraspodeli njegove stanice",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 6,
+     "time": 600
+    },
+    "answer": "Vozilo 6 je imalo udes u 10:00, a predlog preraspodeljuje njegove preostale stanice na kombije.\nVozilo 7 preuzima 1 isporuku (Market Splav) u dodatnoj turi sa polaskom u 12:06; Vozilo 8 preuzima 3 isporuke u dodatnoj turi sa polaskom u 10:30 (Kafić Kod Steve Smederevo, Market Pod lipom, Market Galerija Mladenovac).\nKasne Kafić Kod Steve Smederevo (5 min) i Market Galerija Mladenovac (21 min), pa se preporučuje da se ovi kupci pozovu unapred; nema neisporučenih stanica.\nUkupan trošak dana raste za 9.394 RSD (sa 196.572 na 205.966 RSD), uz povećanje kilometraže za 212,4 km.\n\nPredlog #5 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 72751
+   },
+   {
+    "text": "Vozilu 2 je probušena guma, van funkcije je oko 11:15",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 2,
+     "time": 675
+    },
+    "answer": "Vozilo 2 je prijavilo bušenje gume od 11:15, a pošto je do tada već završilo sve svoje isporuke\n, novih preraspodela nema.\nNema potrebe za preuzimanjem isporuka jer su sve tačke već realizovane.\nNiko ne kasni i sve je uspešno isporučeno.\nPromena troška dana je 0 RSD, a kilometraža se ne menja (+0 km).\nPredlog #6 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 2568
+   },
+   {
+    "text": "Dvojka je u kvaru",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 2,
+     "time": 600
+    },
+    "answer": "Vozilo 2 se pokvarilo u 10:00, a predlog preraspoređuje preostale isporuke na raspoloživa vozila.\nVozilo 8 (kombi 3,5 t) preuzima isporuku za Restoran Kod Bate u dodatnoj turi sa polaskom u 10:30.\nNema novih kašnjenja ni neisporučenih porudžbina, pa pozivi kupcima nisu potrebni.\nTrošak dana raste za 3.466 RSD (na 200.038 RSD), a kilometraža za 60,1 km.\n\nPredlog #7 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 6729
+   },
+   {
+    "text": "Kombi broj 9 crkao",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "breakdown",
+     "vehicle": 9,
+     "time": 600
+    },
+    "answer": "Vozilo 9 je crklo u 10:00, ali pošto je do tada već obavilo sve svoje isporuke, raspored ostaje nepromenjen.\nNema potrebe da druga vozila preuzimaju isporuke.\nNiko ne kasni i sve je uspešno isporučeno.\n\nTrošak dana se ne menja (ostaje 196.572 RSD, +0 km).\n\nPredlog #8 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 1599
+   },
+   {
+    "text": "Hitna porudžbina za Market Ribar, 1 paleta",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C005",
+     "pallets": 1,
+     "kg": null,
+     "empties": 0,
+     "tw_start": null,
+     "tw_end": null
+    },
+    "answer": "Primljena je hitna porudžbina za Market Ribar (Rakovica) i napravljen je predlog plana koji je ubacuje u raspored.\nVozilo 8 (kombi 3,5 t) preuzima isporuku za Market Ribar i polazi iz baze u 10:30 (dolazak kod kupca oko 11:26).\nNema novih kašnjenja, svi kupci stižu na vreme i ništa ne ostaje neisporučeno.\nTrošak dana se povećava sa 196.572 RSD na 202.818 RSD (+6.246 RSD), a kilometraža raste za 84,9 km.\n\nPredlog #9 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 12870
+   },
+   {
+    "text": "Dodaj porudžbinu: Supermarket Avala Zemun 2 palete 1100 kg od 11 do 14",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C137",
+     "pallets": 2,
+     "kg": 1100,
+     "empties": 0,
+     "tw_start": 660,
+     "tw_end": 840
+    },
+    "answer": "Dodata je hitna porudžbina za Supermarket Avala (Zemun) i predložena dodat\nna tura.\nVozilo 7 (kombi 3,5 t) preuzima Supermarket Avala uz polazak iz DC-a u 12:06 i dolazak oko 12:56.\nNema kašnjenja, a sve porudžbine su uspešno obuhvaćene planom.\nTrošak dana raste sa 196.572 RSD na 201.487 RSD (+4.915 RSD), uz povećanje kilometraže za 70,5 km.\n\nPredlog #10 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 7674
+   },
+   {
+    "text": "Hotel Zora iz Inđije traži još 0,5 paleta danas do 13h",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C077",
+     "pallets": 0.5,
+     "kg": null,
+     "empties": 0,
+     "tw_start": null,
+     "tw_end": 780
+    },
+    "answer": "Hotel Zora iz Inđije je zatražio dodatnih 0,5 paleta, a predlog ubacuje tu isporuku u novu popodnevnu turu kombija.\nVozilo 7 (kombi 3,5 t) kreće u dodatnu turu u 12:06 i preuzima Hotel Zora (dolazak oko 12:46).\nNema kašnjenja ni neisporučenih stanica.\nTrošak dana raste za 3.882 RSD (sa 196.572 na 200.454 RSD), uz povećanje kilometraže za 52,7 km.\n\nPredlog #11 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 8280
+   },
+   {
+    "text": "Ubaci hitnu isporuku Kafić Fruška Karaburma 0.3 palete",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C037",
+     "pallets": 0.3,
+     "kg": null,
+     "empties": 0,
+     "tw_start": null,
+     "tw_end": null
+    },
+    "answer": "Primljena je hitna porudžbina za Kafić Fruška (Karaburma) i napravljen predlog novog plana sa dodatnom turom kombija.\nVozilo 8 (kombi) preuzima ovu isporuku i kreće u dodatnu turu iz baze u 10:30.\nKafić Fruška kasni 29 minuta (dolazak u 11:29, prozor do 11:00) – preporuka je da se kupac pozove unapred; ništa ne ostaje neisporučeno.\nTrošak dana je veći za 6.\n494 RSD (sa 196.572 na 203.066 RSD), a kilometraža je veća za 91,2 km.\nPredlog #12 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 71280
+   },
+   {
+    "text": "hitno: restoran kosmaj zvezdara, 4 gajbe i 1 bure",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C097",
+     "pallets": 0.2,
+     "kg": null,
+     "empties": null,
+     "tw_start": null,
+     "tw_end": null
+    },
+    "answer": "Primljena je hitna porudžbina za Restoran Kosmaj i napravljen je predlog novog plana sa dodatnom turom kombija.\nVozilo 8 (kombi) preuzima Restoran Kosmaj u dodatnoj turi sa polaskom iz baze u 10:30 (dolazak u 11:27).\nNema kašnjenja ni neisporučenih pošiljaka.\nTrošak dana je veći za 6.291 RSD (sa 196.572 na 202.863 RSD), a kilometraža je veća za 87 km.\n\nPredlog #13 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 27234
+   },
+   {
+    "text": "Nova porudžbina za Supermarket Lastavica, 3 palete, 1600 kg, povratne ambalaže 1 paleta",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C081",
+     "pallets": 3,
+     "kg": 1600,
+     "empties": 1,
+     "tw_start": null,
+     "tw_end": null
+    },
+    "answer": "Primljena je hitna porudžbina za Supermarket Lastavica i kreiran je predlog novog plana sa dodatnom turom.\nVozilo 5 (kamion 7,5 t) preuzima ovu isporuku i kreće u dodatnu turu iz baze u 10:30.\nSupermarket Lastavica kasni 77 minuta (dolazak u 11:17, prozor je do 10:00) – preporučuje se da se kupac pozove unapred; nema neisporučenih porudžbina.\nTrošak dana se povećava za 8.853 RSD (sa 196.572 na 205.425 RSD), a kilometraža za 65,3 km (sa 1.070,3 na 1.135,6 km).\n\nPredlog #14 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 8159
+   },
+   {
+    "text": "Market Kej Batajnica hitno treba 0,8 paleta između 12 i 14",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "add_order",
+     "customer": "C201",
+     "pallets": 0.8,
+     "kg": null,
+     "empties": 0,
+     "tw_start": 720,
+     "tw_end": 840
+    },
+    "answer": "Hitna porudžbina za Market Kej u Batajnici je ubačena u plan, a optimizator je rasporedio isporuku za novo vreme.\nVozilo 7 (kombi 3,5 t) preuzima ovu isporuku i kreće u dodatnu turu iz baze u 12:06 (stiže oko 12:40).\nNema kašnjenja niti neisporučenih porudžbina.\nTrošak dana veći je za 3.276 RSD (196.572 RSD → 199.848 RSD), a kilometraža je veća za 39,6 km.\n\nPredlog #15 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 8018
+   },
+   {
+    "text": "dodaj kafic jelena 0,4 palete",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "clarify"
+    },
+    "answer": "Našao sam tri kafića sa tim nazivom:\n1. Kafić Jelena (Pančevo, C029)\n2. Kafić Jelena Novi Sad (Novi Sad, C153)\n3. Kafić Jelena Novi Beograd (Novi Beograd, C074)\n\nNa koji tačno misliš?",
+    "cost_usd": 0.0,
+    "latency_ms": 1086
+   },
+   {
+    "text": "Restoran Zora je zatvoren danas",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C017"
+    },
+    "answer": "Restoran Zora (C017) je već uslu\nžen jutros u 08:34, pa otkazivanje isporuke nije moguće jer je poseta završena.",
+    "cost_usd": 0.0,
+    "latency_ms": 2191
+   },
+   {
+    "text": "Kafić Toranj Novi Sad otkazao isporuku",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C073"
+    },
+    "answer": "Isporuka za Kafić Toranj (C073) već je obavljena u 08:21, pa otkazivanje u \n10:00 nije moguće.",
+    "cost_usd": 0.0,
+    "latency_ms": 2141
+   },
+   {
+    "text": "Market Terasa ne prima danas robu",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C089"
+    },
+    "answer": "Isporuka za Market Terasa je već obavljena u 09:49, tako da otkazivanje nije potrebno jer je roba već isporučena.",
+    "cost_usd": 0.0,
+    "latency_ms": 67153
+   },
+   {
+    "text": "Storniraj isporuku za Supermarket Salaš",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C109"
+    },
+    "answer": "Isporuka za Supermarket Salaš (C109) je već uspešno obavljena jutros u 08:58, tako da storniranje nije moguće.",
+    "cost_usd": 0.0,
+    "latency_ms": 1695
+   },
+   {
+    "text": "Kafić Podrum odustao od porudžbine",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C057"
+    },
+    "answer": "Isporuka za Kafić Podrum već je obavljena u 09:03, pa otkazivanje porudžbine više nije moguće.",
+    "cost_usd": 0.0,
+    "latency_ms": 2061
+   },
+   {
+    "text": "Veleprodaja Breza Obrenovac je zatvorena zbog inventara",
+    "ok": false,
+    "errors": [
+     "customer: C061 != C025"
+    ],
+    "pred": {
+     "intent": "cancel",
+     "customer": "C061"
+    },
+    "answer": "Veleprodaja Breza Obrenovac (C025) je zatvorena, ali je isporuka već uspešno obavljena jutros u 07:13, tako da nikakva izmena plana nije potrebna.",
+    "cost_usd": 0.0,
+    "latency_ms": 26337
+   },
+   {
+    "text": "Restoran Bela lađa može tek od 13 do 15h",
+    "ok": false,
+    "errors": [
+     "intent clarify != set_window"
+    ],
+    "pred": {
+     "intent": "clarify"
+    },
+    "answer": "Pronašao sam nekoliko kupaca sa nazivom „Bela lađa”. Da li misliš na Restoran Bela lađa (Vračar, vozilo 3) ili nekog drugog kupca (Kafić Bela lađa, Hotel Bela lađa, Trafika Bela lađa, Supermarket Bela lađa)?",
+    "cost_usd": 0.0,
+    "latency_ms": 1192
+   },
+   {
+    "text": "Market Kod Mike Vračar prima robu samo posle 12",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C209",
+     "tw_start": 720,
+     "tw_end": null
+    },
+    "answer": "Isporuka za Market Kod Mike (C209) već je obavljena u 07:47, tako da pomeranje vremenskog prozora na\n posle 12:00 nije moguće jer je dostava već izvršena.",
+    "cost_usd": 0.0,
+    "latency_ms": 4116
+   },
+   {
+    "text": "Kafić Kod Steve Smederevo: pomeri isporuku na 11-13",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C101",
+     "tw_start": 660,
+     "tw_end": 780
+    },
+    "answer": "Kafić Kod Steve Smederevo je tražio pomeranje termina, pa predlog preraspoređuje tu isporuku u novi prozor.\nVozilo 8 (kombi 3,5 t) preuzima Kafić Kod Steve Smederevo u dodatnoj turi sa polaskom u 10:30 (dolazak oko 12:05).\nNiko ne kasni i sve isporuke su obuhvaćene planom.\nTrošak dana veći je za 10.334 RSD (sa 196.572 na 206.906 RSD), a kilometraža je veća za 185,5 km.\n\nPredlog #16 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 41875
+   },
+   {
+    "text": "Market Pod lipom može od 10 do 12",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C213",
+     "tw_start": 600,
+     "tw_end": 720
+    },
+    "answer": "Market Pod lipom je promenio radno vreme i može da primi robu u novom terminu od 10:00 do 12:00.\nZa ovu isporuku i dalje je zaduženo Vozilo 6, sa predviđenim dolaskom u 10:11.\nNiko ne kasni i sve isporuke mogu biti realizovane.\nTrošak dana ostaje 196.572 RSD, a kilometraža 1.070,3 km (bez promene).\n\nPredlog #17 čeka tvoje odobrenje.",
+    "cost_usd": 0.0,
+    "latency_ms": 2518
+   },
+   {
+    "text": "Supermarket Kod Lale treba da dobije robu između 9 i 11",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C009",
+     "tw_start": 540,
+     "tw_end": 660
+    },
+    "answer": "Isporuka za Supermarket Kod Lale (C009) već je obavljena u 08:26, pa izmena vremenskog prozora nije potrebna.",
+    "cost_usd": 0.0,
+    "latency_ms": 3034
+   },
+   {
+    "text": "Trafika Breza Zemun, novi termin 14:00-15:00",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "set_window",
+     "customer": "C069",
+     "tw_start": 840,
+     "tw_end": 900
+    },
+    "answer": "Isporuka za Trafika Breza (C069) već je obavljena u 08:58, pa izmena prozora više nije moguća.",
+    "cost_usd": 0.0,
+    "latency_ms": 1473
+   },
+   {
+    "text": "Kakav je pregled plana?",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "overview"
+    },
+    "answer": "Aktivno je svih 9 vozila, isporučuje se svih 95 porudžbina bez kašnjenja (100% on-time, 0 kasnih stanica).\nUkupni trošak plana iznosi 196.572 RSD (fiksno 59.000 RSD, trošak km 55.871 RSD, trošak posade 81.701 RSD), uz pređenih 1.070,3 km i prosečnu iskorišćenost vozila od 93,1%.\nVozila 5, 8 i 9 su završila svoje rute, dok ostala vozila još uvek obavljaju dostave.",
+    "cost_usd": 0.0,
+    "latency_ms": 1085
+   },
+   {
+    "text": "gde je kamion 2",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "route",
+     "vehicle": 2
+    },
+    "answer": "Kamion 2 je završio isporuke u Inđiji i Novom Sadu, a trenutno je na putu ka sledećoj stanici (\nRestoran Kod Bate u Rumi, procenjen dolazak u 10:14). Do sada je obavio 8 od ukupno 9 isporuka na turi.",
+    "cost_usd": 0.0,
+    "latency_ms": 1845
+   },
+   {
+    "text": "koliko nas kosta danasnji plan",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "overview"
+    },
+    "answer": "Ukupan trošak današnjeg plana iznosi 196.572 RSD (fiksni trošak 59.000 RSD, trošak po km 55.871 RSD i trošak posade 81.701 RSD), uz ukupno 1.070,3 predđenih kilometara. Sva vozila su u upotrebi, isporučuje se svih 95 porudžbina bez kašnjenja.",
+    "cost_usd": 0.0,
+    "latency_ms": 113838
+   },
+   {
+    "text": "napiši mi pesmu o kamionima",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "unknown"
+    },
+    "answer": "Šimanovačka jutra kad zarane,\nkreću kamioni, razvoze magacine.\nSedmica i dvanaestka, kombiji u nizu,\nDrenova i piva drže zvezdu blizu.\n\nNema stajanja dok rute gore,\nod ranog svitanja pa do kasne zore.",
+    "cost_usd": 0.0,
+    "latency_ms": 7478
+   },
+   {
+    "text": "koliko je sati u Tokiju",
+    "ok": true,
+    "errors": [],
+    "pred": {
+     "intent": "unknown"
+    },
+    "answer": "U Tokiju je trenutno 18:00 (vremenska zona UTC+9).",
+    "cost_usd": 0.0,
+    "latency_ms": 699
+   }
+  ]
+ }
+}

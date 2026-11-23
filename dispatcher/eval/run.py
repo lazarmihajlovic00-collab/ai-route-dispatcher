@@ -134,11 +134,16 @@ def _resolve(problem, plan, intent: dict) -> dict:
     return out
 
 
+EVAL_CLOCK = 600  # commands are evaluated at 10:00
+
+
 def _grade(case: dict, pred: dict) -> tuple[bool, list[str]]:
     exp = case["expect"]
     if case.get("accept_clarify") and pred.get("intent") == "clarify":
         return True, []
     errors = []
+    if pred.get("time") == EVAL_CLOCK:  # "broke down at the current time" is the same change as "now" (time None)
+        pred = {**pred, "time": None}
     if pred.get("intent") != exp["intent"]:
         return False, [f"intent {pred.get('intent')} != {exp['intent']}"]
     for f in FIELDS:
@@ -169,7 +174,7 @@ def command_eval(use_llm: bool) -> dict:
         from ..agent.runner import run
 
         for case in cases:
-            r = run(st, case["text"], 600, "eval")
+            r = run(st, case["text"], EVAL_CLOCK, "eval")
             cost += r.cost_usd
             pred = r.intent or {"intent": "unknown"}
             if pred.get("intent") == "unknown" and r.tool_calls and any(c["name"] == "pronadji_kupca" for c in r.tool_calls):

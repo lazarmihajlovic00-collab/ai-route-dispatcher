@@ -66,7 +66,8 @@ Measured with `dispatcher eval` (8 synthetic delivery days, 10 s solver limit). 
 | Open stops of a broken vehicle delivered the same day | **93.8%** (39.8% also within the window, the rest late with a known delay) |
 | Urgent orders placed | 8 of 8 |
 | Re-planning time | about 5 s (solver time limit) |
-| Serbian commands understood by the rule parser (no AI) | 66.7% of 33 |
+| Serbian commands understood: rule parser (no AI) | 66.7% of 33 |
+| Serbian commands understood: AI dispatcher (Gemini 3.5 Flash Lite, free tier) | **93.9%** of 33, median 4.7 s per command ([details](docs/eval_commands.md)) |
 
 The baseline is a dispatcher-style heuristic (territories by direction, nearest neighbour, everyone leaves at
 06:00), and the data is synthetic. The numbers show the optimizer and re-planner work as designed; the saving for a
@@ -123,7 +124,7 @@ dispatcher/
   roi.py        business case
   eval/         evaluation runner and the 33 test commands
 web/            React + TypeScript + Leaflet dashboard (Vite)
-tests/          30 tests, including the LLM loops with scripted fake models
+tests/          31 tests, including the LLM loops with scripted fake models
 ```
 
 ## Limitations and next steps
@@ -131,8 +132,9 @@ tests/          30 tests, including the LLM loops with scripted fake models
 - Distances are approximate until OSRM (or a traffic-aware matrix) is connected; there is no rush-hour model.
 - Driver breaks (EU/Serbian rules on driving time) are not modelled; the 10 h shift limit is.
 - Positions during the day come from the plan, not GPS; a driver app with delivery confirmations is the next step.
-- The AI dispatcher has been tested with scripted fake models; accuracy with real models is measured by
-  `dispatcher eval --llm` and is not reported here yet.
+- AI dispatcher accuracy is measured on 33 hand-written commands with one model (Gemini 3.5 Flash Lite); a breakdown
+  time equal to the current clock counts as "now" (strict match: 78.8%). Claude has only been tested with scripted
+  fake models.
 - Demo authentication is a user name in a header; production needs SSO and roles.
 
 ## Role

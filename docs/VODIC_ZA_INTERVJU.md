@@ -69,8 +69,10 @@ Iz `docs/eval_report.md` (sintetički podaci, 95 porudžbina dnevno, 9 vozila):
 - Kvarovi u toku dana: 93,8% otvorenih isporuka isporučeno isti dan, 39,8% i u prozoru. Novi plan za oko
   5 s (to je vremenski limit solvera).
 - Komande na srpskom: parser sa pravilima 66,7% na 33 komande. Najteže su "dvojka je u kvaru", "4 gajbe i
-  1 bure", "pomeri na 11-13" i dva kupca sa sličnim imenom. Tu AI model treba da pokaže vrednost; broj dobijaš sa
-  `dispatcher eval --llm`.
+  1 bure", "pomeri na 11-13" i dva kupca sa sličnim imenom. Gemini 3.5 Flash Lite (besplatan nivo) tačno razume
+  **93,9%** (31 od 33), oko 4,7 s po komandi. Promašio je dva kupca sa sličnim imenom i "može tek od 13 do 15h", gde je
+  tražio pojašnjenje umesto da promeni termin. Ako pitaju: kad model upiše trenutno vreme kao vreme kvara, to je isto
+  što i "sada", pa se računa kao tačno; strogo poređenje daje 78,8%.
 - Biznis slučaj (`roi.py`): ušteda na rutama + vreme dispečera (pretpostavke: 90 min ručnog planiranja dnevno,
   35 min po poremećaju, 1,5 poremećaja dnevno). Brojevi se menjaju u dashboardu.
 

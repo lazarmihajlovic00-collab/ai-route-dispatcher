@@ -90,7 +90,10 @@ class DispatchResult:
 
 
 def _t(x: str | None) -> int | None:
-    return parse_hhmm(x) if x else None
+    # Models sometimes send the string "null" instead of a JSON null.
+    if x is None or str(x).strip().lower() in ("", "null", "none"):
+        return None
+    return parse_hhmm(str(x))
 
 
 def tool_to_intent(name: str, args: dict) -> dict | None:
@@ -133,6 +136,8 @@ def _execute(store: Store, name: str, args: dict, clock: int, user: str, result:
                 "newly_unserved": d["newly_unserved"], "facts_text": p["explanation"]}
     except service.ServiceError as e:
         return {"error": str(e)}
+    except (KeyError, ValueError, TypeError) as e:  # bad tool arguments: tell the model, don't crash
+        return {"error": f"neispravni argumenti za {name}: {e}"}
 
 
 def run(store: Store, command: str, clock: int, user: str = "dispecer") -> DispatchResult:
