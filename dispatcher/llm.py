@@ -58,6 +58,22 @@ def gemini_http():
     return _gemini_http
 
 
+def gemini_post(url: str, payload: dict, retries: int = 6):
+    """POST to Gemini, waiting and retrying on 429/5xx (the free tier allows only a few requests per minute)."""
+    import re
+    import time
+
+    for attempt in range(retries + 1):
+        resp = gemini_http().post(url, headers={"x-goog-api-key": os.environ.get("GEMINI_API_KEY", "")}, json=payload)
+        if resp.status_code not in (429, 500, 503) or attempt == retries:
+            return resp
+        hint = re.search(r'"retryDelay":\s*"(\d+)', resp.text)
+        wait = int(hint.group(1)) + 1 if hint else min(60, 5 * 2 ** attempt)
+        print(f"[gemini] {resp.status_code}, waiting {wait} s (attempt {attempt + 1}/{retries})", flush=True)
+        time.sleep(wait)
+    return resp
+
+
 def client():
     global _client
     if _client is None:

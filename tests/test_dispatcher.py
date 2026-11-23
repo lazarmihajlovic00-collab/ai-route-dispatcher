@@ -167,3 +167,22 @@ def test_gemini_schema_conversion():
     p = decls["predlozi_hitnu_porudzbinu"]["parameters"]
     assert p["properties"]["kg"] == {"type": "NUMBER", "nullable": True}
     assert "additionalProperties" not in p
+
+
+def test_gemini_retries_rate_limit(monkeypatch):
+    import time
+
+    calls = []
+
+    class Http:
+        def post(self, url, headers, json):
+            calls.append(url)
+            if len(calls) == 1:
+                return SimpleNamespace(status_code=429, text='{"retryDelay": "2s"}')
+            return SimpleNamespace(status_code=200, text="{}")
+
+    slept = []
+    monkeypatch.setattr(llm, "_gemini_http", Http())
+    monkeypatch.setattr(time, "sleep", slept.append)
+    assert llm.gemini_post("u", {}).status_code == 200
+    assert len(calls) == 2 and slept == [3]

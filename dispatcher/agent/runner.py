@@ -240,7 +240,7 @@ def _run_gemini(store: Store, command: str, clock: int, user: str) -> DispatchRe
     url = f"{llm.GEMINI_URL}/models/{model}:generateContent"
     for _ in range(MAX_TURNS):
         t_call = time.perf_counter()
-        resp = llm.gemini_http().post(url, headers={"x-goog-api-key": os.environ.get("GEMINI_API_KEY", "")}, json={
+        resp = llm.gemini_post(url, {
             "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
             "contents": contents, "tools": gemini_tools(),
             "toolConfig": {"functionCallingConfig": {"mode": "AUTO"}},

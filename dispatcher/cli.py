@@ -32,6 +32,7 @@ def main(argv: list[str] | None = None) -> None:
     e.add_argument("--seeds", default="1,2,3,4,5,6,7,8")
     e.add_argument("--seconds", type=float, default=10.0)
     e.add_argument("--llm", action="store_true")
+    e.add_argument("--commands-only", action="store_true", help="only the command test (fast); writes docs/eval_commands.md")
     e.add_argument("--out", default=str(ROOT / "docs" / "eval_report.md"))
     v = sub.add_parser("serve", help="start the API and dashboard")
     v.add_argument("--host", default="127.0.0.1")
@@ -55,8 +56,13 @@ def main(argv: list[str] | None = None) -> None:
 
         print(handle_with_rules(Store(), "pregled plana", 0, "cli").answer)
     elif args.cmd == "eval":
-        from .eval.run import run_all
+        from .eval.run import run_all, run_commands_only
 
+        if args.commands_only:
+            out = ROOT / "docs" / "eval_commands.md"
+            run_commands_only(args.llm, out, out.with_suffix(".json"))
+            print(out.read_text(encoding="utf-8"))
+            return
         out = Path(args.out)
         rep = run_all([int(x) for x in args.seeds.split(",")], args.seconds, args.llm, out, out.with_suffix(".json"))
         print(out.read_text(encoding="utf-8").split("## 1.")[1][:1500])

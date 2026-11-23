@@ -92,8 +92,12 @@ AI dispatcher: set a free Gemini key (Google AI Studio) or an Anthropic key. Wit
 ```bash
 export GEMINI_API_KEY=...               # or ANTHROPIC_API_KEY=...; LLM_PROVIDER=gemini|anthropic to choose
 dispatcher ask "dvojka je stala kod Inđije u 9:40, preraspodeli"
-dispatcher eval --llm                   # command-understanding accuracy and cost per command
+dispatcher eval --llm --commands-only   # only the 33-command test (a few minutes) -> docs/eval_commands.md
+dispatcher eval --llm                   # full report including the command test
 ```
+
+On Windows PowerShell, set the key with `$env:GEMINI_API_KEY = "..."`. The free Gemini tier allows only a few
+requests per minute; the client waits and retries on HTTP 429, so the command test can take several minutes.
 
 Docker: `cp .env.example .env && docker compose up --build`, then open http://localhost:8000.
 
@@ -119,7 +123,7 @@ dispatcher/
   roi.py        business case
   eval/         evaluation runner and the 33 test commands
 web/            React + TypeScript + Leaflet dashboard (Vite)
-tests/          29 tests, including the LLM loops with scripted fake models
+tests/          30 tests, including the LLM loops with scripted fake models
 ```
 
 ## Limitations and next steps
